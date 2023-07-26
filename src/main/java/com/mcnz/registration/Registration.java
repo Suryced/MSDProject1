@@ -2,42 +2,64 @@ package com.mcnz.registration;
 
 public class Registration {
 	
-	private String customer;
-	private String event;
-	private String date;
+	private int id;
+	private int customer_id;
+	private int event_id;
+	private String registration_date;
+	private String notes;
 	
 	public Registration() {}
 
-	public Registration(String customer, String event, String date) {
+	public Registration(int id, int customer_id, int event_id, String registration_date, String notes) {
 		super();
-		this.customer = customer;
-		this.event = event;
-		this.date = date;
+		this.id = id;
+		this.customer_id = customer_id;
+		this.event_id = event_id;
+		this.registration_date = registration_date;
+		this.notes = notes;
 	}
 
-	public String getCustomer() {
-		return customer;
+	public int getId() {
+		return id;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getEvent() {
-		return event;
+	public int getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setEvent(String event) {
-		this.event = event;
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
-	public String getDate() {
-		return date;
+	public int getEvent_id() {
+		return event_id;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setEvent_id(int event_id) {
+		this.event_id = event_id;
 	}
+
+	public String getRegistration_date() {
+		return registration_date;
+	}
+
+	public void setRegistration_date(String registration_date) {
+		this.registration_date = registration_date;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	
 	
 	
 
