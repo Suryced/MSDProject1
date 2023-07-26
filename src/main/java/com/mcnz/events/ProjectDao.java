@@ -1,4 +1,4 @@
-package Events;
+package com.mcnz.events;
 
 
 import java.util.Collection;

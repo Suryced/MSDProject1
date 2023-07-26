@@ -1,4 +1,4 @@
-package Events;
+package com.mcnz.events;
 
 public class project {
 	public long id;

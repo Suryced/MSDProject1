@@ -1,4 +1,4 @@
-package com.mcnz.rps;
+package com.mcnz.registration;
 
 import java.util.Collection;
 

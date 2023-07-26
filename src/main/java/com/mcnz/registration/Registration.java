@@ -1,4 +1,4 @@
-package com.mcnz.rps;
+package com.mcnz.registration;
 
 public class Registration {
 	
