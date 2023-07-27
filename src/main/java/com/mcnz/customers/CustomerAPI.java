@@ -56,25 +56,32 @@ public class CustomerAPI {
 //	}
 	
 	@PostMapping("/byname")
-	public Customer byNameCustomer(String name)
+	public Customer byNameCustomer(@RequestBody String name)
 	{
 		for (Customer c: list)
 		{
-			if (c.getName() == name)
+			if (c.getName().equals(name))
 			{
+				System.out.println(name);
 				return c;
 			}
+			else
+			{
+				System.out.println(c.getName() + " not equal to " + name);
+			}
 		}
+		System.out.println("Name " + name + " not found!");
 		return null;
 	}
 	
 	@PutMapping("/{customerId}")
 	public ResponseEntity<?> byIdCustomer(@RequestBody Customer customer, @PathVariable("customerId") Long id) {
-		for (Customer c : list)
+		for (int i = 0; i < list.size(); ++i)
 		{
+			Customer c = list.get(i);
 			if (c.getId() == id)
 			{
-				c = customer;
+				list.set(i, customer);
 				return ResponseEntity.ok().build();
 			}
 		}
