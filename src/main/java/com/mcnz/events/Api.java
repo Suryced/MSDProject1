@@ -1,4 +1,4 @@
-package Events;
+package com.mcnz.events;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
