@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,4 +32,18 @@ public class CustomerAPI {
 		return list;
 	}
 	
+	@GetMapping("/api/customers/{name}")
+	public String getCustomerByName(@PathVariable String name) {
+		return name;
+	}
+	
+	@PutMapping("/api/customers/update/{name}")
+	public String putCustomer(@PathVariable String name) {
+		return "Updated";
+	}
+	
+	@DeleteMapping("api/customers/delete/{name}")
+	public String deleteCustomer(@PathVariable String name) {
+		return "deleted";
+	}
 }
