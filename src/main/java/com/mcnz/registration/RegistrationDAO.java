@@ -21,10 +21,12 @@ public class RegistrationDAO {
         return regis;
 	}
 	
-	public Registration saveRegistration(Registration regis, int id) {
-		String sql = "INSERT INTO REGISTRATION (ID, CUSTOMER_ID, EVENT_ID, REGISTRATION_DATE, NOTES) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, id, regis.getCustomer_id(), regis.getEvent_id(), regis.getRegistration_date(), regis.getNotes());
+	public Registration updateRegistration(Registration regis, int reg_id) {
+		String sql = "UPDATE REGISTRATION SET CUSTOMER_ID=?, EVENT_ID=?, REGISTRATION_DATE=?, NOTES= ? WHERE ID = ?";
+
+        jdbcTemplate.update(sql, regis.getCustomer_id(), regis.getEvent_id(), regis.getRegistration_date(), regis.getNotes(), reg_id);
         return regis;
+        
 	}
 	
 	public Collection<Registration> getAllRegistrations() {
