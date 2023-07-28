@@ -1,4 +1,4 @@
-package com.mcnz.events;
+package com.mcnz.service;
 
 
 import javax.sql.DataSource;

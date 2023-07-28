@@ -71,7 +71,7 @@ public class RegistrationAPI {
 	}
 	
 	
-	// will need to change this so that it delets from the repo
+	// will need to change this so that it delets from the repog
 	// will also need to turn the return value into a ResponseEntity<?>
 	@DeleteMapping("/api/registrations/{registrationId}")
 	public int deleteReistratoin(@PathVariable("registrationId") int registrationId) {
