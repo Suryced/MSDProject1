@@ -21,7 +21,7 @@ public class Api {
 	
 //	@Autowired
 //	private ProjectDAO projectDAO;
-
+	
 	@CrossOrigin
 	@GetMapping("/api/events")
 	// might have to change to collection instead of arraylist

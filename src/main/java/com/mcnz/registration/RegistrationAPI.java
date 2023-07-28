@@ -2,7 +2,9 @@ package com.mcnz.registration;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,42 +21,31 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 public class RegistrationAPI {
 	
-//	@Autowired
-//	private RegistrationDAO registrationDAO;
+	@Autowired
+	private RegistrationDAO registrationDAO;
 
 	@CrossOrigin
 	@GetMapping("/api/registrations")
-	// might have to change to collection instead of arraylist
-	public ArrayList<Registration> getRegistrations() {
-//	public String getRegistrations() {
-//		return registrationDAO.getAllRegistrations();
-		ArrayList<Registration> list = new ArrayList<>();
-		Registration r1 = new Registration(1, 1, 1, "today", "send me an email");
-		Registration r2 = new Registration(2, 8, 2, "today", "send me an email");
-		Registration r3 = new Registration(3, 3, 6, "today", "send me an email");
-		Registration r4 = new Registration(4, 4, 4, "today", "send me an email");
-		list.add(r1);
-		list.add(r2);
-		list.add(r3);
-		list.add(r4);
-		return list;
+	public Collection<Registration> getRegistrations() {
+		/// gets all of the registrations in the database
+		return registrationDAO.getAllRegistrations();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/api/registrations/{registrationId}")
 	public Registration getRegistrations(@PathVariable("registrationId") int id) {
-//	public String getRegistration(@PathVariable String id) {
-//		return registrationDAO.getAllRegistrations();
-		return getRegistrations().get(id);
+		/// Gets a specific registration using the ID given in the URL
+		return registrationDAO.getRegistration(id);
 	}
 	
 	@CrossOrigin
 	@PostMapping("/api/registrations")
 	public ResponseEntity<?> addRegistration(@RequestBody Registration newRegistration, UriComponentsBuilder uri) {
+		/// Saves a registration to the database
 		if (newRegistration.getId() != 0 || newRegistration.getRegistration_date() == null) {
 			return ResponseEntity.badRequest().build();
 		}
-//		newRegistration = repo.save(newRegistration);
+		newRegistration = registrationDAO.saveRegistration(newRegistration);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newRegistration.getId()).toUri();
 		ResponseEntity<?> response = ResponseEntity.created(location).build();
 		return response;
@@ -63,20 +54,23 @@ public class RegistrationAPI {
 	
 	@PutMapping("/api/registrations/{registrationId}")
 	public ResponseEntity<?> putCustomer(@RequestBody Registration newRegistration, @PathVariable("registrationId") int registrationId){
+		/// Saves a registration to the database to a specific id
 		if (newRegistration.getId() != registrationId || newRegistration.getRegistration_date() == null) {
 			return ResponseEntity.badRequest().build();
 		}
-//		newRegistration = repo.save(newRegistration);
+		newRegistration = registrationDAO.saveRegistration(newRegistration, registrationId);
 		return ResponseEntity.ok().build();
 	}
 	
 	
-	// will need to change this so that it delets from the repog
-	// will also need to turn the return value into a ResponseEntity<?>
 	@DeleteMapping("/api/registrations/{registrationId}")
-	public int deleteRegistration(@PathVariable("registrationId") int registrationId) {
-//		repo.delete(registrationId)
-		return registrationId;
+	public ResponseEntity<?> deleteRegistration(@PathVariable("registrationId") int registrationId) {
+		try {
+			registrationDAO.deleteRegistration(registrationId);
+			return ResponseEntity.ok().build();
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 

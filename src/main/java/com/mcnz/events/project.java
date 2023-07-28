@@ -9,6 +9,14 @@ public class project {
 		
 	}
 
+	public project(long id, String eventCode, String title, String description) {
+		super();
+		this.id = id;
+		this.eventCode = eventCode;
+		this.title = title;
+		this.description = description;
+	}
+
 	public long getId() {
 		return id;
 	}
