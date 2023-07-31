@@ -1,4 +1,4 @@
-insert into EVENTS (EVENTCODE, TITLE, DESCRIPTION)
+insert into EVENTS (EVENT_CODE, TITLE, DESCRIPTION)
 values('ABC123','Project Event','Example Description');
 
 insert into REGISTRATION (CUSTOMER_ID, EVENT_ID, REGISTRATION_DATE, NOTES) VALUES('1', '1', 'today', 'none');
