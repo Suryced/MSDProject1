@@ -1,8 +1,9 @@
 package com.mcnz.events;
 
 import java.net.URI;
-import java.util.ArrayList;
+import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,42 +20,31 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 public class Api {
 	
-//	@Autowired
-//	private ProjectDAO projectDAO;
-	
+	@Autowired
+	private ProjectDao ProjectDao;
+
 	@CrossOrigin
 	@GetMapping("/api/events")
-	// might have to change to collection instead of arraylist
-	public ArrayList<project> getEvents() {
-//	public String getEvents() {
-//		return projectDAO.getAllEvents();
-		ArrayList<project> list = new ArrayList<>();
-		project p1 = new project(1,"ABC123", "All-Java Class", "example description");
-		project p2 = new project(2,"ABC124", "All-Python Class", "example description");
-		project p3 = new project(3,"ABC125", "All-SQL Class", "example description");
-		project p4 = new project(4,"ABC126", "All-JavaScript Class", "example description");
-		list.add(p1);
-		list.add(p2);
-		list.add(p3);
-		list.add(p4);
-		return list;
+	public Collection<project> getEvents() {
+		/// gets all of the events in the database
+		return ProjectDao.getAllEvents();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/api/events/{eventId}")
-	public project getEvents(@PathVariable("eventId") int id) {
-//	public String getEvent(@PathVariable String id) {
-//		return projectDAO.getAllEvents();
-		return getEvents().get(id);
+	public project getEvent(@PathVariable("eventId") int id) {
+		/// Gets a specific events using the ID given in the URL
+		return ProjectDao.getEvent(id);
 	}
 	
 	@CrossOrigin
 	@PostMapping("/api/events")
 	public ResponseEntity<?> addEvent(@RequestBody project newEvent, UriComponentsBuilder uri) {
-		if (newEvent.getId() != 0 || newEvent.getEventCode() != null) {
+		/// Saves an event to the database
+		if (newEvent.getId() != 0 || newEvent.getEventCode() == null) {
 			return ResponseEntity.badRequest().build();
 		}
-//		newEvent = repo.save(newEvent);
+		newEvent = ProjectDao.saveEvent(newEvent);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newEvent.getId()).toUri();
 		ResponseEntity<?> response = ResponseEntity.created(location).build();
 		return response;
@@ -62,21 +52,21 @@ public class Api {
 	}
 	
 	@PutMapping("/api/events/{eventId}")
-	public ResponseEntity<?> putCustomer(@RequestBody project newEvent, @PathVariable("eventId") int eventId){
-		if (newEvent.getId() != eventId || newEvent.getEventCode() == null) {
-			return ResponseEntity.badRequest().build();
-		}
-//		newEvent = repo.save(newEvent);
+	public ResponseEntity<?> updateEvent(@RequestBody project newEvent, @PathVariable("eventId") int eventId){
+		/// Saves an event to the database to a specific id
+		newEvent = ProjectDao.updateEvent(newEvent, eventId);
 		return ResponseEntity.ok().build();
 	}
 	
 	
-	// will need to change this so that it deletes from the repo
-	// will also need to turn the return value into a ResponseEntity<?>
 	@DeleteMapping("/api/events/{eventId}")
-	public int deleteReistratoin(@PathVariable("eventId") int eventId) {
-//		repo.delete(eventId)
-		return eventId;
+	public ResponseEntity<?> deleteEvent(@PathVariable("eventId") int eventId) {
+		try {
+			ProjectDao.deleteEvent(eventId);
+			return ResponseEntity.ok().build();
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 
