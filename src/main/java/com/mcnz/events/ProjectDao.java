@@ -16,13 +16,13 @@ public class ProjectDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public Project saveEvent(Project events) {
+	public project saveEvent(project events) {
 		String sql = "INSERT INTO EVENT (EVENT_CODE, TITLE, DESCRIPTION) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, events.getEventCode(), events.getTitle(), events.getDescription());
         return events;
 	}
 	
-	public Project updateEvent(Project events, int event_id) {
+	public project updateEvent(project events, int event_id) {
 		String sql = "UPDATE EVENT SET EVENT_CODE=?, TITLE=?, DESCRIPTION=? WHERE ID = ?";
 
         jdbcTemplate.update(sql, events.getEventCode(), events.getTitle(), events.getDescription(), event_id);
@@ -30,14 +30,14 @@ public class ProjectDao {
         
 	}
 	
-	public Collection<Project> getAllEvents() {
+	public Collection<project> getAllEvents() {
 		return jdbcTemplate.query("Select * from EVENT", new
-				BeanPropertyRowMapper<Project>(Project.class));
+				BeanPropertyRowMapper<project>(Project.class));
 	}
 	
-	public Project getEvent(int id) {
+	public project getEvent(int id) {
 		String sql = "SELECT * FROM EVENT WHERE id = ?";
-		List<Project> events = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Project.class), id);
+		List<project> events = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(project.class), id);
 		return events.isEmpty() ? null : events.get(0);
 	}
 	
