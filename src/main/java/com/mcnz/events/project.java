@@ -1,32 +1,36 @@
 package com.mcnz.events;
 
 public class project {
-	public long id;
-	public String eventCode, title, description;
+	public int id;
+	public String code, title, description;
 
 	
 	public project () {
 		
 	}
+	
+	
 
-	public project(long id, String eventCode, String title, String description) {
+	public project(int id, String code, String title, String description) {
 		super();
 		this.id = id;
-		this.eventCode = eventCode;
+		this.code = code;
 		this.title = title;
 		this.description = description;
 	}
+
+
 
 	public long getId() {
 		return id;
 	}
 
 	public String getEventCode() {
-		return eventCode;
+		return code;
 	}
 
-	public void setEventCode(String eventCode) {
-		this.eventCode = eventCode;
+	public void setEventCode(String code) {
+		this.code = code;
 	}
 
 	public String getTitle() {
@@ -45,7 +49,7 @@ public class project {
 		this.description = description;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
