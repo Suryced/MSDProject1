@@ -32,7 +32,7 @@ public class ProjectDao {
 	
 	public Collection<project> getAllEvents() {
 		return jdbcTemplate.query("Select * from EVENT", new
-				BeanPropertyRowMapper<project>(Project.class));
+				BeanPropertyRowMapper<project>(project.class));
 	}
 	
 	public project getEvent(int id) {
