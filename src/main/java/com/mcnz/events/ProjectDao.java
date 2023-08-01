@@ -16,15 +16,15 @@ public class ProjectDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public project saveEvent(project events) {
-		String sql = "INSERT INTO EVENTS (EVENT_CODE, TITLE, DESCRIPTION) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, events.getEventCode(), events.getTitle(), events.getDescription());
+		String sql = "INSERT INTO EVENTS (CODE, TITLE, DESCRIPTION) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, events.getCode(), events.getTitle(), events.getDescription());
         return events;
 	}
 	
 	public project updateEvent(project events, int event_id) {
-		String sql = "UPDATE EVENTS SET EVENT_CODE=?, TITLE=?, DESCRIPTION=? WHERE ID = ?";
+		String sql = "UPDATE EVENTS SET CODE=?, TITLE=?, DESCRIPTION=? WHERE ID = ?";
 
-        jdbcTemplate.update(sql, events.getEventCode(), events.getTitle(), events.getDescription(), event_id);
+        jdbcTemplate.update(sql, events.getCode(), events.getTitle(), events.getDescription(), event_id);
         return events;
         
 	}

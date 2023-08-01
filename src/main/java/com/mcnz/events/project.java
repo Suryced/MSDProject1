@@ -25,11 +25,11 @@ public class project {
 		return id;
 	}
 
-	public String getEventCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setEventCode(String code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
