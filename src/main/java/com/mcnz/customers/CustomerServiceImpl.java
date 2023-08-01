@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public void updateCustomer(Customer newCustomer) {
-		newCustomer.setId((long) 0);
+		newCustomer.setId(0);
 		customerDAO.updateCustomer(newCustomer);
 	}
 

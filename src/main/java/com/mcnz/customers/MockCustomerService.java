@@ -7,16 +7,16 @@ public class MockCustomerService implements CustomerService {
 	static ArrayList<Customer> customers = new ArrayList<Customer>();
 	
 	static {
-		customers.add(new Customer((long) 1 , "Bruce"         , "pass"    , "bruce@a.com"       ));
-		customers.add(new Customer((long)2 , "Paul"          , "pass"    , "paul@b.com"        ));
-		customers.add(new Customer((long)3 , "Rick"          , "pass"    , "rick@c.com"        ));
-		customers.add(new Customer((long)4 , "Cameron"       , "123456"  , "cameron@mcnz.com"  ));
-		customers.add(new Customer((long)6 , "Curtis"        , "abcdefg" , "curtis@example.com"));
-		customers.add(new Customer((long)7 , "andy@gmail.com", null      , "andy"              ));
-		customers.add(new Customer((long)8 , "Aaron"         , null      , "Aaron@example.com" ));
-		customers.add(new Customer((long)9 , "nn"            , "rr"      , "aa"                ));
-		customers.add(new Customer((long)11, "Jake"          , "pass"    , "jblatt@wowway.com" ));
-		customers.add(new Customer((long)12, "Test"          , "passtest", "test@test.com"     ));
+		customers.add(new Customer(1 , "Bruce"         , "pass"    , "bruce@a.com"       ));
+		customers.add(new Customer(2 , "Paul"          , "pass"    , "paul@b.com"        ));
+		customers.add(new Customer(3 , "Rick"          , "pass"    , "rick@c.com"        ));
+		customers.add(new Customer(4 , "Cameron"       , "123456"  , "cameron@mcnz.com"  ));
+		customers.add(new Customer(6 , "Curtis"        , "abcdefg" , "curtis@example.com"));
+		customers.add(new Customer(7 , "andy@gmail.com", null      , "andy"              ));
+		customers.add(new Customer(8 , "Aaron"         , null      , "Aaron@example.com" ));
+		customers.add(new Customer(9 , "nn"            , "rr"      , "aa"                ));
+		customers.add(new Customer(11, "Jake"          , "pass"    , "jblatt@wowway.com" ));
+		customers.add(new Customer(12, "Test"          , "passtest", "test@test.com"     ));
 	}	
 	
 	@Override

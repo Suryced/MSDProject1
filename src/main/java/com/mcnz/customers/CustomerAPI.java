@@ -78,7 +78,7 @@ public class CustomerAPI {
 	public ResponseEntity<?> byIdCustomer(@RequestBody Customer customer, @PathVariable("customerId") int id) {
 		List<Customer> list = getCustomers();
 		try {
-			Customer c = customerService.getCustomerById(id.intValue());
+			Customer c = customerService.getCustomerById(id);
 			if (c != null) {
 				customerService.updateCustomer(customer);
 				return ResponseEntity.ok().build();
@@ -86,8 +86,9 @@ public class CustomerAPI {
 				customerService.addCustomer(customer);
 				return ResponseEntity.ok().build();
 			}
-		}
+		}catch(Exception e) {
 		return ResponseEntity.badRequest().build();
+		}
 	}
 	
 	@DeleteMapping("/{customerId}")
