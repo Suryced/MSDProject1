@@ -54,9 +54,19 @@ public class RegistrationAPI {
 	
 	@PutMapping("/api/registrations/{registrationId}")
 	public ResponseEntity<?> updateRegistration(@RequestBody Registration newRegistration, @PathVariable("registrationId") int registrationId){
-		/// Saves a registration to the database to a specific id
-		newRegistration = registrationDAO.updateRegistration(newRegistration, registrationId);
-		return ResponseEntity.ok().build();
+		try {
+			Registration r = registrationDAO.getRegistration(registrationId);
+			if (r != null) {
+				registrationDAO.updateRegistration(newRegistration, registrationId);
+			}else{
+				registrationDAO.saveRegistration(newRegistration);
+			}
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			registrationDAO.saveRegistration(newRegistration);
+			return ResponseEntity.ok().build();
+		}
+
 	}
 	
 	

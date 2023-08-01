@@ -53,4 +53,10 @@ public class MockCustomerService implements CustomerService {
 		}
 	}
 
+	@Override
+	public void updateCustomer(Customer newCustomer) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

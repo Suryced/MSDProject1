@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/customers")
 public class CustomerAPI {
 	
+	CustomerService customerService = new CustomerServiceImpl();
+	
 	static ArrayList<Customer> list = new ArrayList<>();
 	
 	static {
@@ -76,16 +78,40 @@ public class CustomerAPI {
 	
 	@PutMapping("/{customerId}")
 	public ResponseEntity<?> byIdCustomer(@RequestBody Customer customer, @PathVariable("customerId") Long id) {
-		for (int i = 0; i < list.size(); ++i)
-		{
-			Customer c = list.get(i);
-			if (c.getId() == id)
-			{
-				list.set(i, customer);
+		try {
+			Customer c = customerService.getCustomerById(id.intValue());
+			if (c != null) {
+				customerService.updateCustomer(customer);
+				return ResponseEntity.ok().build();
+			}else {
+				customerService.addCustomer(customer);
 				return ResponseEntity.ok().build();
 			}
+		} catch (Exception e) {
+			customerService.addCustomer(customer);
+			return ResponseEntity.ok().build();
 		}
-		return ResponseEntity.badRequest().build();
+		
+		
+		
+		
+//		for (int i = 0; i < list.size(); ++i)
+//			
+//			
+//			
+//			
+//			
+//			
+//			
+//		{
+//			Customer c = list.get(i);
+//			if (c.getId() == id)
+//			{
+//				list.set(i, customer);
+//				return ResponseEntity.ok().build();
+//			}
+//		}
+//		return ResponseEntity.badRequest().build();
 	}
 	
 	@DeleteMapping("/{customerId}")
