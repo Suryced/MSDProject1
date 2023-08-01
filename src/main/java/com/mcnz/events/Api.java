@@ -26,21 +26,21 @@ public class Api {
 	@CrossOrigin
 	@GetMapping("/api/events")
 	public Collection<project> getEvents() {
-		/// gets all of the registrations in the database
+		/// gets all of the events in the database
 		return ProjectDao.getAllEvents();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/api/events/{eventId}")
 	public project getEvent(@PathVariable("eventId") int id) {
-		/// Gets a specific registration using the ID given in the URL
+		/// Gets a specific events using the ID given in the URL
 		return ProjectDao.getEvent(id);
 	}
 	
 	@CrossOrigin
 	@PostMapping("/api/events")
 	public ResponseEntity<?> addEvent(@RequestBody project newEvent, UriComponentsBuilder uri) {
-		/// Saves a registration to the database
+		/// Saves an event to the database
 		if (newEvent.getId() != 0 || newEvent.getEventCode() == null) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -52,8 +52,8 @@ public class Api {
 	}
 	
 	@PutMapping("/api/events/{eventId}")
-	public ResponseEntity<?> updateRegistration(@RequestBody project newEvent, @PathVariable("eventId") int eventId){
-		/// Saves a registration to the database to a specific id
+	public ResponseEntity<?> updateEvent(@RequestBody project newEvent, @PathVariable("eventId") int eventId){
+		/// Saves an event to the database to a specific id
 		newEvent = ProjectDao.updateEvent(newEvent, eventId);
 		return ResponseEntity.ok().build();
 	}
