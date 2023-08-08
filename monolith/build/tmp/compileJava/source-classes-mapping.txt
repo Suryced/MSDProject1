@@ -1,0 +1,34 @@
+com/webage/App.java
+ com.webage.App
+com/mcnz/registration/Registration.java
+ com.mcnz.registration.Registration
+com/mcnz/customers/CustomerServiceImpl.java
+ com.mcnz.customers.CustomerServiceImpl
+com/mcnz/events/Api.java
+ com.mcnz.events.Api
+com/mcnz/customers/CustomerService.java
+ com.mcnz.customers.CustomerService
+com/mcnz/customers/CustomerDAO.java
+ com.mcnz.customers.CustomerDAO
+com/mcnz/registration/RegistrationAPI.java
+ com.mcnz.registration.RegistrationAPI
+com/mcnz/service/DaoConfig.java
+ com.mcnz.service.DaoConfig
+com/mcnz/customers/Customer.java
+ com.mcnz.customers.Customer
+com/mcnz/rps/Score.java
+ com.mcnz.rps.Score
+com/mcnz/registration/RegistrationDAO.java
+ com.mcnz.registration.RegistrationDAO
+com/mcnz/events/project.java
+ com.mcnz.events.project
+com/mcnz/rps/RestAPI.java
+ com.mcnz.rps.RestAPI
+com/mcnz/service/ServiceAPI.java
+ com.mcnz.service.ServiceAPI
+com/mcnz/customers/CustomerAPI.java
+ com.mcnz.customers.CustomerAPI
+com/mcnz/customers/MockCustomerService.java
+ com.mcnz.customers.MockCustomerService
+com/mcnz/events/ProjectDao.java
+ com.mcnz.events.ProjectDao
