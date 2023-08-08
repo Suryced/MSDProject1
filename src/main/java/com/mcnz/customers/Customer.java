@@ -2,16 +2,16 @@ package com.mcnz.customers;
 
 public class Customer {
 
-	private int    id;
+	private Long   id;
 	private String name;
 	private String password;
 	private String email;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -20,7 +20,7 @@ public class Customer {
 	{
 	}
 	
-	public Customer(int id, String name, String password, String email)
+	public Customer(Long id, String name, String password, String email)
 	{
 		this.id = id;
 		this.email = email;
