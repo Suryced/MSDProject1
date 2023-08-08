@@ -10,9 +10,8 @@ public class Event {
 	{
 	}
 	
-	public Event(String id, String code, String title, String description) {
+	public Event(String code, String title, String description) {
 		super();
-		this.id = id;
 		this.code = code;
 		this.title = title;
 		this.description = description;
