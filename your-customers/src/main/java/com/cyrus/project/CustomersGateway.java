@@ -42,9 +42,10 @@ public class CustomersGateway {
 	}
 	
 	@PostMapping("/customers")
-	public Customer create(@RequestBody Customer event)
+	public Customer create(@RequestBody Customer customer)
 	{
-		return customersService.saveOrUpdate(event);
+		System.out.println("In Post for Customer " + customer.getName());
+		return customersService.saveOrUpdate(customer);
 	}
 	
 	@PutMapping("/customers/{id}")

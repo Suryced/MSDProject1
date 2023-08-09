@@ -14,16 +14,16 @@ public class TokenApi {
 	JWTUtil jwtUtil = new JWTHelper();
 	
 	@PostMapping("/token")
-	public ResponseEntity<?> getToken(@RequestBody TokenRequestData tokenRequestData) {
+	public ResponseEntity<?> getToken(@RequestBody Customer customer) {
 		
-		String username = tokenRequestData.getUsername();
-		String password = tokenRequestData.getPassword();
-		String scopes = tokenRequestData.getScopes();
+		String username = customer.getName();
+		String password = customer.getPassword();
+		//String scopes = tokenRequestData.getScopes();
 		
 		if (username != null && username.length() > 0 
 				&& password != null && password.length() > 0 
 				&& Authenticator.checkPassword(username, password)) {
-			Token token = jwtUtil.createToken(scopes);
+			Token token = jwtUtil.createToken("*");
 			ResponseEntity<?> response = ResponseEntity.ok(token);
 			return response;			
 		}

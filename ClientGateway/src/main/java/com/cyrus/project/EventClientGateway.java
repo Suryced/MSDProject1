@@ -55,7 +55,7 @@ public class EventClientGateway {
 	{
 		RestTemplate rt = new RestTemplate();
 		if (id != null && id.length() < 5) {
-			event.setIdentifier(null);
+			event.setMongoId(null);
 		}
 		event = rt.postForObject("http://localhost:8011/events/", event, Event.class);
 		return event;

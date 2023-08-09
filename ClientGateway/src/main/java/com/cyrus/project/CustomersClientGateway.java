@@ -56,6 +56,7 @@ public class CustomersClientGateway {
 		RestTemplate rt = new RestTemplate();
 		if (id != null && id.length() < 5) {
 			customer.setId(null);
+			customer.setMongoId(null);
 		}
 		customer = rt.postForObject("http://localhost:8012/customers/", customer, Customer.class);
 		return customer;
