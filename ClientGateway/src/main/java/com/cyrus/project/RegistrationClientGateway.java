@@ -53,7 +53,10 @@ public class RegistrationClientGateway {
 	public Registration update(@RequestBody Registration registration, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		registration = rt.postForObject("http://localhost:8013/registrations/" + id, registration, Registration.class);
+		if (id != null && id.length() < 5) {
+			registration.setId(null);
+		}
+		registration = rt.postForObject("http://localhost:8013/registrations/", registration, Registration.class);
 		return registration;
 	}
 

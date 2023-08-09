@@ -44,9 +44,10 @@ public class RegistrationsGateway {
 		return registrationsService.saveOrUpdate(Registration);
 	}
 	
-	@PutMapping("/registrations/{id{")
+	@PutMapping("/registrations/{id}")
 	public Registration update(@RequestBody Registration Registration)
 	{
+		System.out.println("You are in the put method");
 		return create(Registration);
 	}
 	

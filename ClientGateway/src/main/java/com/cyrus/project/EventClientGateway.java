@@ -18,7 +18,7 @@ public class EventClientGateway {
 	public List<Event> getAll() {
 		RestTemplate rt = new RestTemplate();
 		List events = rt.getForObject(
-				"http://localhost:8012/events", 
+				"http://localhost:8011/events", 
 				List.class);
 		System.out.println(events);
 		return events;
@@ -54,7 +54,10 @@ public class EventClientGateway {
 	public Event update(@RequestBody Event event, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		event = rt.postForObject("http://localhost:8011/events/" + id, event, Event.class);
+		if (id != null && id.length() < 5) {
+			event.setIdentifier(null);
+		}
+		event = rt.postForObject("http://localhost:8011/events/", event, Event.class);
 		return event;
 	}
 

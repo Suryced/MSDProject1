@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Registration {
 
 	@Id
-	private String id;
+	private String identifier;
+	
+	private long id;
 	private String event_id, customer_id, notes;
 	private java.util.Date registration_date = new java.util.Date();
 	
@@ -22,12 +24,16 @@ public class Registration {
 		this.notes = notes;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdentifier() {
+		return identifier;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	public long getId() {
+		return new Long (identifier.replaceAll("[^0-9]", "").substring(0, 7));
 	}
 
 	public String getEvent_id() {

@@ -54,7 +54,10 @@ public class CustomersClientGateway {
 	public Customer update(@RequestBody Customer customer, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		customer = rt.postForObject("http://localhost:8012/customers/" + id, customer, Customer.class);
+		if (id != null && id.length() < 5) {
+			customer.setId(null);
+		}
+		customer = rt.postForObject("http://localhost:8012/customers/", customer, Customer.class);
 		return customer;
 	}
 	

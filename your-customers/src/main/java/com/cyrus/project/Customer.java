@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Customer {
 
 	@Id
-	private String id;
+	private String identifier;
+	
 	private String name, email, password;
 	
 	public Customer() {}
@@ -19,12 +20,10 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getId() {
-		return id;
+	public long getId() {
+		return new Long (identifier.replaceAll("[^0-9]", "").substring(0, 7));
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getName() {
 		return name;
 	}

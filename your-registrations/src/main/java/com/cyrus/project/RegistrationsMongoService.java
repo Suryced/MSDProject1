@@ -14,12 +14,12 @@ public class RegistrationsMongoService implements RegistrationsService {
 	
 	@Override
 	public void loadData() {
-		Registration Registration1 = new Registration("1", "1", "NSFW");
-		Registration Registration2 = new Registration("2", "2", "PG-13");
-		Registration Registration3 = new Registration("3", "3", "Unrated");
-		mongoRepository.save(Registration1);
-		mongoRepository.save(Registration2);
-		mongoRepository.save(Registration3);
+//		Registration Registration1 = new Registration("1", "1", "NSFW");
+//		Registration Registration2 = new Registration("2", "2", "PG-13");
+//		Registration Registration3 = new Registration("3", "3", "Unrated");
+//		mongoRepository.save(Registration1);
+//		mongoRepository.save(Registration2);
+//		mongoRepository.save(Registration3);
 	}
 	
 	@Override

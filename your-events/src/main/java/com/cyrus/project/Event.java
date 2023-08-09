@@ -5,6 +5,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="events")
 public class Event {
+	
+	@Id
+	private String identifier;
+	
+	private String code, title, description;
 
 	public Event() 
 	{
@@ -16,13 +21,21 @@ public class Event {
 		this.title = title;
 		this.description = description;
 	}
+	
+	
 
-	public String getId() {
-		return id;
+	public String getIdentifier() {
+		return identifier;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
+
+	public long getId() {
+		return new Long (identifier.replaceAll("[^0-9]", "").substring(0, 7));
+	}
+	
 	public String getCode() {
 		return code;
 	}
@@ -46,8 +59,6 @@ public class Event {
 //		return "Event [id=" + id + ", title=" + title + ", description=" + description + "]";
 //	}
 
-	@Id
-	private String id;
-	private String code, title, description;
+	
 	
 }
