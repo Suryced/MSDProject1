@@ -42,7 +42,7 @@ public class CustomersClientGateway {
 		rt.delete("http://localhost:8012/customers/" + id);
 	}
 	
-	@PostMapping("/customers")
+	@PostMapping("/api/customers")
 	public Customer create(@RequestBody Customer customer)
 	{
 		RestTemplate rt = new RestTemplate();
@@ -50,7 +50,7 @@ public class CustomersClientGateway {
 		return customer;
 	}
 	
-	@PutMapping("/customers/{id}")
+	@PutMapping("/api/customers/{id}")
 	public Customer update(@RequestBody Customer customer, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();

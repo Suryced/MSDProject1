@@ -29,7 +29,7 @@ public class EventClientGateway {
 	public Event getById(@PathVariable String id) {
 		RestTemplate rt = new RestTemplate();
 		Event event = rt.getForObject(
-				"http://localhost:8012/events/" + id, 
+				"http://localhost:8011/events/" + id, 
 				Event.class);
 		System.out.println(event);
 		return event;
@@ -39,22 +39,22 @@ public class EventClientGateway {
 	public void deleteById(@PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		rt.delete("http://localhost:8012/events/" + id);
+		rt.delete("http://localhost:8011/events/" + id);
 	}
 	
-	@PostMapping("/events")
+	@PostMapping("/api/events")
 	public Event create(@RequestBody Event event)
 	{
 		RestTemplate rt = new RestTemplate();
-		event = rt.postForObject("http://localhost:8012/events/", event, Event.class);
+		event = rt.postForObject("http://localhost:8011/events/", event, Event.class);
 		return event;
 	}
 	
-	@PutMapping("/events/{id}")
+	@PutMapping("/api/events/{id}")
 	public Event update(@RequestBody Event event, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		event = rt.postForObject("http://localhost:8012/events/" + id, event, Event.class);
+		event = rt.postForObject("http://localhost:8011/events/" + id, event, Event.class);
 		return event;
 	}
 

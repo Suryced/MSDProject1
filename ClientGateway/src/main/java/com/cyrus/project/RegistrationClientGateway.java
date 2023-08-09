@@ -17,7 +17,7 @@ public class RegistrationClientGateway {
 	public List<Registration> getAll() {
 		RestTemplate rt = new RestTemplate();
 		List registrations = rt.getForObject(
-				"http://localhost:8012/registrations", 
+				"http://localhost:8013/registrations", 
 				List.class);
 		System.out.println(registrations);
 		return registrations;
@@ -28,7 +28,7 @@ public class RegistrationClientGateway {
 	public Registration getById(@PathVariable String id) {
 		RestTemplate rt = new RestTemplate();
 		Registration registration = rt.getForObject(
-				"http://localhost:8012/registrations/" + id, 
+				"http://localhost:8013/registrations/" + id, 
 				Registration.class);
 		System.out.println(registration);
 		return registration;
@@ -38,22 +38,22 @@ public class RegistrationClientGateway {
 	public void deleteById(@PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		rt.delete("http://localhost:8012/registrations/" + id);
+		rt.delete("http://localhost:8013/registrations/" + id);
 	}
 	
-	@PostMapping("/registrations")
+	@PostMapping("/api/registrations")
 	public Registration create(@RequestBody Registration registration)
 	{
 		RestTemplate rt = new RestTemplate();
-		registration = rt.postForObject("http://localhost:8012/registrations/", registration, Registration.class);
+		registration = rt.postForObject("http://localhost:8013/registrations/", registration, Registration.class);
 		return registration;
 	}
 	
-	@PutMapping("/registrations/{id}")
+	@PutMapping("/api/registrations/{id}")
 	public Registration update(@RequestBody Registration registration, @PathVariable String id)
 	{
 		RestTemplate rt = new RestTemplate();
-		registration = rt.postForObject("http://localhost:8012/registrations/" + id, registration, Registration.class);
+		registration = rt.postForObject("http://localhost:8013/registrations/" + id, registration, Registration.class);
 		return registration;
 	}
 
