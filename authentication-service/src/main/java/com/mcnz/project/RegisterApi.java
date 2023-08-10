@@ -11,16 +11,28 @@ import java.net.URL;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @CrossOrigin
+@RestController
 public class RegisterApi {
 
-	public ResponseEntity<?> registerCustomer(Customer newCustomer, UriComponentsBuilder uri) {
-		if (newCustomer.getEmail() == null) {
+	@PostMapping("/account/register")
+	public ResponseEntity<?> registerCustomer(@RequestBody Customer newCustomer, UriComponentsBuilder uri) {
+		
+		if (newCustomer.getEmail() == null || newCustomer.getName() == null || newCustomer.getPassword() == null) {
 			return ResponseEntity.badRequest().build();
 		}	
+		
+		RestTemplate rt = new RestTemplate();
+		rt.postForObject("http://localhost:8012/customers", newCustomer, Customer.class);
+		
+		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCustomer.getId()).toUri();
 		ResponseEntity<?> response = ResponseEntity.created(location).build();
@@ -30,7 +42,7 @@ public class RegisterApi {
 	private void postNewCustomerToCustomerAPI(String json_string) {
 		try {
 
-			URL url = new URL("http://localhost:8080/api/customers");
+			URL url = new URL("http://localhost:8012/customers");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
