@@ -1,11 +1,16 @@
 package com.mcnz.project;
 
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
 public class Authenticator {
 	
 	public static boolean checkUser(String username) {
-		if( (username != null && username.length() > 0) &&
-			( username.equalsIgnoreCase("john") 
-		    || username.equalsIgnoreCase("susan"))) {
+		Optional<Customer> c = getCustomerByNameFromCustomerAPI(username);
+		
+		if(c != null) {
 			return true;
 		}else {
 			return false;
@@ -13,17 +18,31 @@ public class Authenticator {
 	}
 	
 	public static boolean checkPassword(String username, String password) {
-		if(checkUser(username)) {
-			if(username.equalsIgnoreCase("john") && password.equals("pass")) {
+		Optional<Customer> c = getCustomerByNameFromCustomerAPI(username);
+		
+		if (c != null) {
+			Customer customer = c.get(); // turns the optional customer into a real customer
+			if (customer.getPassword() == password) {
 				return true;
 			}
-			if(username.equalsIgnoreCase("susan") && password.equals("pass")) {
-				return true;
-			}			
-		}else {
-			return false;
 		}
 		return false;
+		
 	}
+	
+	private static Optional<Customer> getCustomerByNameFromCustomerAPI(String username) {
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<Customer[]> response = rt.getForEntity("http://localhost:8012/customers", Customer[].class);
+		Customer[] customers = response.getBody();
+		for (Customer c : customers)
+		{
+			if (c.getName().equals(username))
+			{
+				Optional<Customer> ret_customer = Optional.of(c);
+				return ret_customer;
+			}
+		}
+		return null;
+	}  
 	
 }
