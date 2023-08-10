@@ -7,10 +7,11 @@ import org.springframework.web.client.RestTemplate;
 
 public class Authenticator {
 	
+	// useless for now 
 	public static boolean checkUser(String username) {
-		Optional<Customer> c = getCustomerByNameFromCustomerAPI(username);
+		Customer c = getCustomerByNameFromCustomerAPI(username);
 		
-		if(c != null) {
+		if(c.getName() != null) {
 			return true;
 		}else {
 			return false;
@@ -18,11 +19,14 @@ public class Authenticator {
 	}
 	
 	public static boolean checkPassword(String username, String password) {
-		Optional<Customer> c = getCustomerByNameFromCustomerAPI(username);
+		Customer c = getCustomerByNameFromCustomerAPI(username);
 		
-		if (c != null) {
-			Customer customer = c.get(); // turns the optional customer into a real customer
-			if (customer.getPassword() == password) {
+		if (c.getName() == null || c.getPassword() == null) {
+			return false;
+		}
+		
+		if (c.getName().equals(username)) {
+			if (c.getPassword().equals(password)) {
 				return true;
 			}
 		}
@@ -30,7 +34,7 @@ public class Authenticator {
 		
 	}
 	
-	private static Optional<Customer> getCustomerByNameFromCustomerAPI(String username) {
+	private static Customer getCustomerByNameFromCustomerAPI(String username) {
 		RestTemplate rt = new RestTemplate();
 		ResponseEntity<Customer[]> response = rt.getForEntity("http://localhost:8012/customers", Customer[].class);
 		Customer[] customers = response.getBody();
@@ -38,11 +42,10 @@ public class Authenticator {
 		{
 			if (c.getName().equals(username))
 			{
-				Optional<Customer> ret_customer = Optional.of(c);
-				return ret_customer;
+				return c;
 			}
 		}
-		return null;
+		return new Customer();
 	}  
 	
 }
