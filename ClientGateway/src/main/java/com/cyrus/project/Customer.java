@@ -1,13 +1,34 @@
 package com.cyrus.project;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="customers")
 public class Customer {
 
-	@Id
-	private String id;
+
+	private String mongoId;
+	
+	private Long id;
+	public Long getId() {
+		try {
+			return (new Long (mongoId.replaceAll("[^0-9]", "").substring(0, 7)));
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public void setId(Long id) {
+		if (id == null) {
+			mongoId = null;
+		} 
+		this.id = id;
+	}
+
+	public String getMongoId() {
+		return mongoId;
+	}
+
+	public void setMongoId(String mongoId) {
+		this.mongoId = mongoId;
+	}
+	
 	private String name, email, password;
 	
 	public Customer() {}
@@ -19,12 +40,8 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
+	
 	public String getName() {
 		return name;
 	}

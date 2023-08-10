@@ -1,4 +1,4 @@
-package com.mcnz.project;
+package com.cyrus.project;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class AuthFilter implements Filter {
 
 //	JWTUtil jwtUtil = new JWTMockUtil();
-	JWTUtil jwtUtil = new JWTHelper();
+	//JWTUtil jwtUtil = new JWTHelper();
 	
 	private String api_scope = "com.api.customer.r";
 
@@ -49,7 +49,7 @@ public class AuthFilter implements Filter {
 		}
 
 		// reject request and return error instead of data
-		res.sendError(HttpServletResponse.SC_FORBIDDEN, "failed authentication");
+		//res.sendError(HttpServletResponse.SC_FORBIDDEN, "failed authentication");
 	}
 
 }

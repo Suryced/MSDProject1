@@ -7,7 +7,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Customer {
 
 	@Id
-	private String identifier;
+	private String mongoId;
+	
+	private Long id;
+	public Long getId() {
+		try {
+			return (new Long (mongoId.replaceAll("[^0-9]", "").substring(0, 7)));
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public void setId(Long id) {
+		if (id == null) {
+			mongoId = null;
+		} 
+		this.id=id;
+	}
+
+	public String getMongoId() {
+		return mongoId;
+	}
+
+	public void setMongoId(String mongoId) {
+		this.mongoId = mongoId;
+	}
 	
 	private String name, email, password;
 	
@@ -20,9 +44,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	public long getId() {
-		return new Long (identifier.replaceAll("[^0-9]", "").substring(0, 7));
-	}
+
 	
 	public String getName() {
 		return name;
