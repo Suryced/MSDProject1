@@ -17,7 +17,7 @@ group = 'yourregistrations'
 
 description = "Tracking Registrations."
 
-mainClassName = "com.cyrus.project.RegistrationsSpringBootApp"
+mainClassName = "com.cyrus.project.RegistrationsSpringBootApplication"
 
 
 sourceCompatibility = 11
