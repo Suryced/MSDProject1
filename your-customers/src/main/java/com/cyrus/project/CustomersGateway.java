@@ -39,7 +39,13 @@ public class CustomersGateway {
 	
 	@DeleteMapping("/customers/{id}")
 	public void deleteCustomerById(@PathVariable("id") String id) {
-		customersService.deleteCustomerById(id);
+		List<Customer> cus = findAllCustomers();
+		for(Customer c : cus) {
+			System.out.println(c.getMongoId() + ":  " + id);
+			if(("" + c.getId()).equals(id)) {	
+				customersService.deleteCustomerById(c.getMongoId());
+			}
+		}
 	}
 	
 	@PostMapping("/customers")

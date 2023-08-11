@@ -36,7 +36,13 @@ public class ServiceGateway {
 	
 	@DeleteMapping("/events/{id}")
 	public void deleteEventById(@PathVariable("id") String id) {
-		eventzService.deleteEventById(id);
+		List<Event> cus = findAllEvents();
+		for(Event e : cus) {
+			System.out.println(e.getMongoId() + ":  " + id);
+			if(("" + e.getId()).equals(id)) {	
+				eventzService.deleteEventById(e.getMongoId());
+			}
+		}
 	}
 	
 	@PostMapping("/events")

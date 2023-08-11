@@ -36,7 +36,13 @@ public class RegistrationsGateway {
 	
 	@DeleteMapping("/registrations/{id}")
 	public void deleteRegistrationById(@PathVariable("id") String id) {
-		registrationsService.deleteRegistrationById(id);
+		List<Registration> res = findAllRegistrations();
+		for(Registration r : res) {
+			System.out.println(r.getMongoId() + ":  " + id);
+			if(("" + r.getId()).equals(id)) {	
+				registrationsService.deleteRegistrationById(r.getMongoId());
+			}
+		}
 	}
 	
 	@PostMapping("/registrations")

@@ -28,7 +28,7 @@ public class CustomersClientGateway {
 	}
 	
 	@GetMapping("/api/customers/{id}")
-	public Customer getById(@PathVariable String id) {
+	public Customer getById(@PathVariable("id") String id) {
 		RestTemplate rt = new RestTemplate();
 		Customer customer = rt.getForObject(
 				"http://localhost:8012/customers/" + id, 
@@ -38,7 +38,7 @@ public class CustomersClientGateway {
 	}
 	
 	@DeleteMapping("/api/customers/{id}")
-	public void deleteById(@PathVariable String id)
+	public void deleteById(@PathVariable("id") String id)
 	{
 		RestTemplate rt = new RestTemplate();
 		rt.delete("http://localhost:8012/customers/" + id);
@@ -53,7 +53,7 @@ public class CustomersClientGateway {
 	}
 	
 	@PutMapping("/api/customers/{id}")
-	public Customer update(@RequestBody Customer customer, @PathVariable String id)
+	public Customer update(@RequestBody Customer customer, @PathVariable("id") String id)
 	{
 		RestTemplate rt = new RestTemplate();
 		if (id != null && id.length() < 5) {
@@ -62,6 +62,16 @@ public class CustomersClientGateway {
 		}
 		customer = rt.postForObject("http://localhost:8012/customers/", customer, Customer.class);
 		return customer;
+	}
+	
+	private String getMongoId(String id) {
+		List<Customer> cus = getAll();
+		for(Customer c : cus) {
+			if(("" + c.getId()).equals(id)) {
+				return c.getMongoId();
+			}
+		}
+		return "";
 	}
 	
 }
